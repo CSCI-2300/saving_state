@@ -1,13 +1,15 @@
 package mvc.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+
 import mvc.GameObserver;
 
-public class TicTacToeBoard
+public class TicTacToeBoard implements Serializable
 {
    private int size;
    private TicTacToePiece [][]pieces;
-   private ArrayList<GameObserver> observers = new ArrayList<GameObserver>();
+   private transient ArrayList<GameObserver> observers;
 
    public TicTacToeBoard()
    {
@@ -73,6 +75,9 @@ public class TicTacToeBoard
 
    public void register(GameObserver observer)
    {
+      if (observers == null){
+         observers = new ArrayList<GameObserver>();
+      }
       observers.add(observer);
    }
 

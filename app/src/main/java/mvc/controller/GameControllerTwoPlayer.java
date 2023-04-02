@@ -1,8 +1,13 @@
 package mvc.controller;
 
+import java.io.*;
+
 import mvc.ControllerInterface;
 
 import mvc.view.TicTacToeGUI;
+import mvc.view.ConfirmationDialog;
+import mvc.view.FileSelector;
+
 import mvc.model.TicTacToeBoard;
 import mvc.model.TicTacToePiece;
 import mvc.model.AutoPlayer;
@@ -34,4 +39,26 @@ public class GameControllerTwoPlayer implements ControllerInterface
          currentPiece = TicTacToePiece.X;
       }
    }
+
+   public void userQuit()
+   {
+      if (!ConfirmationDialog.confirmSaveGame())
+      {
+         return;
+      }
+      try
+      {
+         String filePath = FileSelector.selectFileToSave();
+         FileOutputStream fileOutputStream = new FileOutputStream(filePath);
+         ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+         objectOutputStream.writeObject(this.board);
+         objectOutputStream.close();
+         fileOutputStream.close();
+      }
+      catch (IOException exception)
+      {
+         System.out.println(exception.getMessage());
+      }
+   }
+
 }

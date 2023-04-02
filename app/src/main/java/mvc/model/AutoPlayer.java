@@ -1,5 +1,7 @@
 package mvc.model;
-public class AutoPlayer
+
+import java.io.Serializable;
+public class AutoPlayer implements Serializable
 {
    private TicTacToePiece myPiece;
 

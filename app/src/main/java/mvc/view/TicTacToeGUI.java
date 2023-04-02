@@ -48,8 +48,18 @@ public class TicTacToeGUI implements ActionListener, GameObserver
       this.buttons.setOpaque(false);
       this.mainPanel.add(buttons);
 
+      // draw the current pieces on the board
+      this.update();
+
       this.mainFrame.add(mainPanel);
 
+      // add a window listener, to intercept window closing
+      this.mainFrame.addWindowListener(new WindowAdapter(){
+         public void windowClosing(WindowEvent e){
+            controller.userQuit();
+         }
+      });
+      
       this.mainFrame.pack();
       this.mainFrame.setVisible(true);
    }

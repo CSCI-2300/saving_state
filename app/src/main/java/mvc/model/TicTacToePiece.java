@@ -1,4 +1,5 @@
 package mvc.model;
+
 public enum TicTacToePiece {
     X("X"), 
     O("O"); 
